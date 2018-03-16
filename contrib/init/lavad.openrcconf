@@ -1,0 +1,26 @@
+# /etc/conf.d/lavad: config file for /etc/init.d/lavad
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/lava/lava.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/lavad"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/lavad.pid"
+
+# Where to write lavad data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/lavad"
+
+# User and group to own lavad process
+#BITCOIND_USER="lava"
+#BITCOIND_GROUP="lava"
+
+# Path to lavad executable
+#BITCOIND_BIN="/usr/bin/lavad"
+
+# Nice value to run lavad under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

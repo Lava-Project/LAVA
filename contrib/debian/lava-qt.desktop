@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=LAVA
+Comment=LAVA P2P Cryptocurrency
+Comment[fr]=LAVA, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=LAVA, eşten eşe kriptografik sanal para birimi
+Exec=lava-qt %u
+Terminal=false
+Type=Application
+Icon=lava128
+MimeType=x-scheme-handler/lava;
+Categories=Office;Finance;

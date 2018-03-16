@@ -1,0 +1,26 @@
+[Unit]
+Description=LAVA's distributed currency daemon
+After=network.target
+
+[Service]
+User=lava
+Group=lava
+
+Type=forking
+PIDFile=/var/lib/lavad/lavad.pid
+
+ExecStart=/usr/bin/lavad -daemon -pid=/var/lib/lavad/lavad.pid \
+          -conf=/etc/lava/lava.conf -datadir=/var/lib/lavad
+
+ExecStop=-/usr/bin/lava-cli -conf=/etc/lava/lava.conf \
+         -datadir=/var/lib/lavad stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
