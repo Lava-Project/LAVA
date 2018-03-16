@@ -1,5 +1,5 @@
 ---
-name: "LAVA-win-1.0"
+name: "lava-win-1.2"
 enable_cache: true
 suites:
 - "trusty"
@@ -22,10 +22,11 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/Lava-Project/LAVA.git"
+- "url": "https://github.com/Lava-Project/LAVA"
   "dir": "LAVA"
 files: []
 script: |
+
   WRAP_DIR=$HOME/wrapped
   HOSTS="i686-w64-mingw32 x86_64-w64-mingw32"
   CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests"
@@ -101,7 +102,7 @@ script: |
   create_per-host_linker_wrapper "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd LAVA
+  cd lava
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -119,14 +120,14 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=`echo LAVA-*.tar.gz`
+  SOURCEDIST=`echo lava-*.tar.gz`
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
 
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar xf ../$SOURCEDIST
-  find LAVA-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find lava-* | sort | tar --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   mkdir -p $OUTDIR/src
   cp ../$SOURCEDIST $OUTDIR/src
   popd
@@ -145,7 +146,7 @@ script: |
     make ${MAKEOPTS}
     make deploy
     make install DESTDIR=${INSTALLPATH}
-    cp -f LAVA-*setup*.exe $OUTDIR/
+    cp -f lava-*setup*.exe $OUTDIR/
     cd installed
     # mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/ # temporarily disabled for Zerocoin
     # find . -name "lib*.la" -delete            # temporarily disabled for Zerocoin
